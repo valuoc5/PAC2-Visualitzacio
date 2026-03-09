@@ -1,35 +1,143 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Timeline - SpaceX</title>
+  <title>Timeline Mejorado - SpaceX</title>
   <style>
-    body { font-family: Arial, sans-serif; padding: 20px; }
-    .timeline { position: relative; max-width: 800px; margin: auto; }
-    .timeline-event { padding: 10px 40px; position: relative; background: #f0f0f0; border-radius: 6px; margin-bottom: 20px; }
-    .timeline-event::after { content: ''; position: absolute; width: 12px; height: 12px; background: #007BFF; border-radius: 50%; left: -6px; top: 15px; }
-    .timeline-date { font-weight: bold; margin-bottom: 5px; }
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #f8f9fa;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 40px;
+    }
+
+    .timeline {
+      position: relative;
+      max-width: 900px;
+      margin: auto;
+      padding: 10px 0;
+    }
+
+    /* Línea central */
+    .timeline::after {
+      content: '';
+      position: absolute;
+      width: 4px;
+      background-color: #007BFF;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -2px;
+    }
+
+    .timeline-event {
+      padding: 15px 25px;
+      position: relative;
+      width: 45%;
+      background-color: #fff;
+      border-radius: 8px;
+      margin: 20px 0;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+      opacity: 0;
+      transform: translateY(50px);
+      animation: slide-in 0.6s forwards;
+    }
+
+    @keyframes slide-in {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Eventos izquierda/derecha */
+    .timeline-event.left {
+      left: 0;
+    }
+
+    .timeline-event.right {
+      left: 55%;
+    }
+
+    /* Círculo */
+    .timeline-event::before {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: #007BFF;
+      border-radius: 50%;
+      top: 15px;
+      z-index: 1;
+    }
+
+    .timeline-event.left::before {
+      right: -10px;
+    }
+
+    .timeline-event.right::before {
+      left: -10px;
+    }
+
+    .timeline-date {
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #007BFF;
+    }
+
+    .timeline-content {
+      font-size: 16px;
+      color: #333;
+    }
+
+    /* Responsive */
+    @media screen and (max-width: 768px) {
+      .timeline-event {
+        width: 90%;
+        left: 5% !important;
+      }
+
+      .timeline-event.left::before,
+      .timeline-event.right::before {
+        left: -10px;
+      }
+
+      .timeline::after {
+        left: 10px;
+      }
+    }
   </style>
 </head>
 <body>
-  <h1>SpaceX Timeline</h1>
+
+  <h1>Timeline SpaceX</h1>
+
   <div class="timeline">
-    <div class="timeline-event">
+
+    <div class="timeline-event left" style="animation-delay: 0.1s;">
       <div class="timeline-date">2002</div>
-      Fundació de SpaceX
+      <div class="timeline-content">Fundación de SpaceX</div>
     </div>
-    <div class="timeline-event">
+
+    <div class="timeline-event right" style="animation-delay: 0.3s;">
       <div class="timeline-date">2008</div>
-      Llançament del Falcon 1
+      <div class="timeline-content">Primer lanzamiento exitoso del Falcon 1</div>
     </div>
-    <div class="timeline-event">
+
+    <div class="timeline-event left" style="animation-delay: 0.5s;">
       <div class="timeline-date">2012</div>
-      Dragon arriba a l'ISS
+      <div class="timeline-content">Dragon llega a la Estación Espacial Internacional (ISS)</div>
     </div>
-    <div class="timeline-event">
+
+    <div class="timeline-event right" style="animation-delay: 0.7s;">
       <div class="timeline-date">2020</div>
-      Llançament del Crew Dragon
+      <div class="timeline-content">Primer vuelo tripulado del Crew Dragon</div>
     </div>
+
   </div>
+
 </body>
 </html>
