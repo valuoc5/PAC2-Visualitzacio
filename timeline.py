@@ -1,45 +1,34 @@
-import requests
 import pandas as pd
 import plotly.express as px
 
-# Get real dataset from SpaceX API
-url = "https://api.spacexdata.com/v4/launches"
-data = requests.get(url).json()
+# Load dataset
+df = pd.read_csv("nobel_laureates_data.csv")
 
-# Extract relevant fields
-launches = []
-for launch in data:
-    launches.append({
-        "Mission": launch["name"],
-        "Date": launch["date_utc"],
-        "Success": "Success" if launch["success"] else "Failure"
-    })
+# Keep relevant columns
+df = df[["year","category","fullName","motivation"]]
 
-df = pd.DataFrame(launches)
+# Remove missing values
+df = df.dropna()
 
-# Convert date
-df["Date"] = pd.to_datetime(df["Date"])
+# Sample to keep visualization readable
+df = df.sample(150)
 
-# Sort by date
-df = df.sort_values("Date")
-
-# Create timeline-like scatter
+# Create timeline
 fig = px.scatter(
     df,
-    x="Date",
-    y="Mission",
-    color="Success",
-    title="Timeline of SpaceX Launches",
-    hover_data=["Date"]
+    x="year",
+    y="category",
+    color="category",
+    hover_name="fullName",
+    hover_data=["motivation"],
+    title="Nobel Prize Laureates Timeline"
 )
 
 fig.update_layout(
-    height=700,
-    xaxis_title="Year",
-    yaxis_title="Mission"
+    height=600
 )
 
-# Save interactive visualization
-fig.write_html("timeline_spacex_real.html", include_plotlyjs="cdn")
+# Save HTML for GitHub Pages
+fig.write_html("timeline_nobel.html")
 
-print("Timeline generated: timeline_spacex_real.html")
+fig.show()
