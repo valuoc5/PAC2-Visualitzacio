@@ -1,0 +1,32 @@
+# Ignore Python files
+*.py
+__pycache__/
+*.pyc
+
+# Ignore datasets
+*.csv
+*.xlsx
+*.json
+
+# Ignore markdown and notes
+*.md
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore environments
+venv/
+.env/
+
+# Ignore Jupyter
+.ipynb_checkpoints/
+
+# Ignore everything by default
+*
+
+# BUT keep HTML visualizations
+!*.html
+
+# Keep gitignore itself
+!.gitignore
