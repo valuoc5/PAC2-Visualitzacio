@@ -30,3 +30,6 @@ venv/
 
 # Keep gitignore itself
 !.gitignore
+
+# Ignore datasets
+*.csv
